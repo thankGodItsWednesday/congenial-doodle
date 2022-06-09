@@ -82,6 +82,7 @@ import Moment from 'moment';
             });
         }
         handleSubmit(values) {
+            this.toggleModal();
             console.log('Current State is: ' + JSON.stringify(values));
             alert('Current State is: ' + JSON.stringify(values));
             // event.preventDefault();
