@@ -1,19 +1,10 @@
-import React, { Component } from 'react';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody,
+import React from 'react';
+import { Card, CardImg, CardText, CardBody,
     CardTitle } from 'reactstrap';
 import Moment from 'moment';
 
     
-
-class Dishdetail extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedDish: null
-        };
-    }
-
-    renderDish(dish) {
+    function RenderDish(dish) {
        /*  console.log("renderDish is invoked, value of this is : ");
         console.log(this);
         console.log(dish);
@@ -36,7 +27,7 @@ class Dishdetail extends Component {
             );
     }
 
-    renderComments(comments){
+    function RenderComments(comments){
        /*  console.log("renderDish is invoked, value of this is : ");
         console.log(this);
         console.log(comments); */
@@ -66,8 +57,8 @@ class Dishdetail extends Component {
         );
     };        
 
-    render() {
-        const dish = this.props.dish;
+    const DishDetail = (props) => {
+        const dish = props.dish;
         if (dish != null)
             return(
             <div className='container'>
@@ -79,10 +70,10 @@ class Dishdetail extends Component {
                 </div>          
                 <div className='row'>
                     <div className='col-12 col-md-5 m-1'>
-                        {this.renderDish(dish)}
+                        {RenderDish(dish)}
                     </div>
                     <div className='col-12 col-md-5 m-1'>
-                        {this.renderComments(this.props.dish.comments)}
+                        {RenderComments(props.dish.comments)}
                     </div>
                 </div>
             </div>
@@ -95,6 +86,5 @@ class Dishdetail extends Component {
 
     
 
-}
 
-export default Dishdetail;
+export default DishDetail;
