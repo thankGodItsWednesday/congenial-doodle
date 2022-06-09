@@ -83,6 +83,7 @@ import Moment from 'moment';
         }
         handleSubmit(values) {
             this.toggleModal();
+            this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
             console.log('Current State is: ' + JSON.stringify(values));
             alert('Current State is: ' + JSON.stringify(values));
             // event.preventDefault();
@@ -159,11 +160,11 @@ import Moment from 'moment';
     }
     }
 
-    function RenderComments(comments){
+    function RenderComments({ comments, addComment, dishId }){
        /*  console.log("renderComments is invoked, value of this is : ");
         console.log(comments); */
         if (comments != null) {
-            const dishComments = comments.comments.map((comment) => {        
+            const dishComments = comments.map((comment) => {        
             return (
                 <div key={comment.id}>
                  <p >{comment.comment}<br />
@@ -179,7 +180,7 @@ import Moment from 'moment';
                         <li>{dishComments}</li>
                     </ul>
                     <div>
-                    <CommentForm />
+                    <CommentForm dishId={dishId} addComment={addComment} />
                 </div>  
                 </div> 
             </div>         
@@ -203,24 +204,27 @@ import Moment from 'moment';
         if (dish != null)
         return (
             <div className="container">
-            <div className="row">
-                <Breadcrumb>
-                    <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-                    <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
-                </Breadcrumb>
-                <div className="col-12">
-                    <h3>{props.dish.name}</h3>
-                    <hr />
-                </div>                
-            </div>
-            <div className="row">
-                <div className="col-12 col-md-5 m-1">
-                    <RenderDish dish={props.dish} />
+                <div className="row">
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>{props.dish.name}</h3>
+                        <hr />
+                    </div>                
                 </div>
-                <div className="col-12 col-md-5 m-1">
-                    <RenderComments comments={props.comments} />
+                <div className="row">
+                    <div className="col-12 col-md-5 m-1">
+                        <RenderDish dish={props.dish} />
+                    </div>
+                    <div className="col-12 col-md-5 m-1">
+                        <RenderComments comments={props.comments}
+                                        addComment={props.addComment}
+                                        dishId={props.dish.id}
+                        /> 
+                    </div>
                 </div>
-            </div>
             </div>
         );
         else
