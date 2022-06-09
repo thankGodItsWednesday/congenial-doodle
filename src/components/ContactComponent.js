@@ -59,9 +59,12 @@ class Contact extends Component {
         this.setState({
             touched: { ...this.state.touched, [field]: true }
         });
+        console.log("handleBlur invoked : ");
+        console.log(field);
+        console.log(this.state.touched);
     }
 
-    validate(firstname, lastname, telnum, email) {
+   /*  validate(firstname, lastname, telnum, email) {
         const errors = {
             firstname: '',
             lastname: '',
@@ -87,11 +90,11 @@ class Contact extends Component {
             errors.email = 'Email should contain a @';
 
         return errors;
-    }
+    } */
 
     render() {
 
-        const errors = this.validate(this.state.firstname, this.state.lastname, this.state.telnum, this.state.email);
+        // const errors = this.validate(this.state.firstname, this.state.lastname, this.state.telnum, this.state.email);
         const required = (val) => val && val.length;
         const maxLength = (len) => (val) => !(val) || (val.length <= len);
         const minLength = (len) => (val) => val && (val.length >= len);
