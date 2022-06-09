@@ -37,9 +37,9 @@ class Dishdetail extends Component {
     }
 
     renderComments(comments){
-        console.log("renderDish is invoked, value of this is : ");
+       /*  console.log("renderDish is invoked, value of this is : ");
         console.log(this);
-        console.log(comments);
+        console.log(comments); */
         if (comments != null) {
             const dishComments = comments.map((comment) => {        
             return (
@@ -70,7 +70,7 @@ class Dishdetail extends Component {
         const dish = this.props.dish;
         if (dish != null)
             return(
-            <div>
+            <div className='container'>
                 <div className='row'>
                     <div className='col-12'>
                         <h3>{dish.name}</h3>
