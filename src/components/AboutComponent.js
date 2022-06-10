@@ -20,9 +20,9 @@ function RenderLeader ({leader}) {
 }
 
 function About(props) {
-console.log("About Called : ");
+/* console.log("About Called : ");
 console.log(props);
-console.log(props.leaders.leaders);
+console.log(props.leaders.leaders); */
     const leaders = props.leaders.leaders.map((leader) => {
         return (
             <RenderLeader leader={leader} />

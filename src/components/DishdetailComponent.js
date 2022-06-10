@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Moment from 'moment';
 import {Loading} from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
     
     function RenderDish(dish) {
@@ -17,13 +18,18 @@ import { baseUrl } from '../shared/baseUrl';
         console.log(dish.description); */
         if (dish != null)
             return(
-                <Card>
-                    <CardImg top src={baseUrl + dish.dish.image} alt={dish.name} />
-                    <CardBody>
-                      <CardTitle>{dish.dish.name}</CardTitle>
-                      <CardText>{dish.dish.description}</CardText>
-                    </CardBody>
-                </Card>
+                <FadeTransform in 
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
+                    <Card>
+                        <CardImg top src={baseUrl + dish.dish.image} alt={dish.name} />
+                        <CardBody>
+                        <CardTitle>{dish.dish.name}</CardTitle>
+                        <CardText>{dish.dish.description}</CardText>
+                        </CardBody>
+                    </Card>
+                </FadeTransform>
             );
         else
             return(
@@ -59,9 +65,9 @@ import { baseUrl } from '../shared/baseUrl';
             this.setState({
                 touched: { ...this.state.touched, [field]: true }
             });
-            console.log("handleBlur invoked : ");
+            /* console.log("handleBlur invoked : ");
             console.log(field);
-            console.log(this.state.touched);
+            console.log(this.state.touched); */
         }
         
         handleInputChange(event) {
@@ -75,10 +81,10 @@ import { baseUrl } from '../shared/baseUrl';
         }
     
         toggleModal() {
-            console.log("Modal toggled: ");
+            /* console.log("Modal toggled: ");
             console.log(this);
             console.log(this.state);
-            console.log(this.state.isModalOpen);
+            console.log(this.state.isModalOpen); */
             this.setState({
                 isModalOpen: !this.state.isModalOpen
             });
@@ -166,24 +172,28 @@ import { baseUrl } from '../shared/baseUrl';
        /*  console.log("renderComments is invoked, value of this is : ");
         console.log(comments); */
         if (comments != null) {
-            const dishComments = comments.map((comment) => {        
-            return (
-                <div key={comment.id}>
-                 <p >{comment.comment}<br />
-                -- {comment.author} , {Moment(comment.date).format('MMMM Do YYYY')} </p>
-                </div>                       
-                    )
-            });        
+                   
         return(
             <div>
                 <div>
                     <h4>Comments</h4>
                     <ul className='list-unstyled'>
-                        <li>{dishComments}</li>
+                        <Stagger in>
+                            {comments.map((comment) => {
+                                return (
+                                    <Fade in>
+                                    <li key={comment.id}>
+                                    <p>{comment.comment}</p>
+                                    <p>-- {comment.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))} </p>
+                                    </li>
+                                    </Fade>
+                                );
+                            })}
+                        </Stagger>                              
                     </ul>
                     <div>
                     <CommentForm dishId={dishId} postComment={postComment} />
-                </div>  
+                    </div>  
                 </div> 
             </div>         
         );
