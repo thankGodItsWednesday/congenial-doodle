@@ -85,7 +85,7 @@ import { baseUrl } from '../shared/baseUrl';
         }
         handleSubmit(values) {
             this.toggleModal();
-            this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+            this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
             console.log('Current State is: ' + JSON.stringify(values));
             alert('Current State is: ' + JSON.stringify(values));
             // event.preventDefault();
@@ -162,7 +162,7 @@ import { baseUrl } from '../shared/baseUrl';
     }
     }
 
-    function RenderComments({ comments, addComment, dishId }){
+    function RenderComments({ comments, postComment, dishId }){
        /*  console.log("renderComments is invoked, value of this is : ");
         console.log(comments); */
         if (comments != null) {
@@ -182,7 +182,7 @@ import { baseUrl } from '../shared/baseUrl';
                         <li>{dishComments}</li>
                     </ul>
                     <div>
-                    <CommentForm dishId={dishId} addComment={addComment} />
+                    <CommentForm dishId={dishId} postComment={postComment} />
                 </div>  
                 </div> 
             </div>         
@@ -241,7 +241,7 @@ import { baseUrl } from '../shared/baseUrl';
                         </div>
                         <div className="col-12 col-md-5 m-1">
                             <RenderComments comments={props.comments}
-                                            addComment={props.addComment}
+                                            postComment={props.postComment}
                                             dishId={props.dish.id}
                             /> 
                         </div>
