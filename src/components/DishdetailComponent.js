@@ -5,6 +5,8 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import Moment from 'moment';
 import {Loading} from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
+
     
     function RenderDish(dish) {
         /* console.log("renderDish is invoked, value of this is : ");
@@ -16,7 +18,7 @@ import {Loading} from './LoadingComponent';
         if (dish != null)
             return(
                 <Card>
-                    <CardImg top src={dish.dish.image} alt={dish.dish.name} />
+                    <CardImg top src={baseUrl + dish.dish.image} alt={dish.name} />
                     <CardBody>
                       <CardTitle>{dish.dish.name}</CardTitle>
                       <CardText>{dish.dish.description}</CardText>
