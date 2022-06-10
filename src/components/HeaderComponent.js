@@ -24,14 +24,14 @@ class Header extends Component {
       }
 
       toggleModal() {
-          console.log("Modal toggled");
+          /* console.log("Modal toggled");
           console.log(this);
           console.log(this.state);
-          console.log(this.state.isModalOpen)
+          console.log(this.state.isModalOpen) */
         this.setState({
           isModalOpen: !this.state.isModalOpen
         });
-        console.log(this.state.isModalOpen);
+        // console.log(this.state.isModalOpen);
       }
 
       handleLogin(event) {

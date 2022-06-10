@@ -10,6 +10,7 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { postComment, fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 const mapDispatchToProps = dispatch => ({
   postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
@@ -96,6 +97,8 @@ class Main extends Component {
       return (
         <div>
           <Header />
+          <TransitionGroup>
+            <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
           <div>
             <Switch>
                 <Route path='/home' component={HomePage} />
@@ -106,6 +109,8 @@ class Main extends Component {
                 <Redirect to="/home" />
             </Switch>
           </div>
+          </CSSTransition>
+          </TransitionGroup>
           <Footer />
         </div>
       );
